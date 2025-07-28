@@ -613,8 +613,9 @@ h2 {
     }
     
     .hero {
-        align-items: flex-end;
-        padding-bottom: 2rem;
+        align-items: flex-start; /* Align to top */
+        padding-top: 0;
+        padding-bottom: 0;
     }
     
     .hero-content {
@@ -625,7 +626,9 @@ h2 {
         padding: 0 20px;
         color: white;
         width: 100%;
-        margin-bottom: 1rem;
+        margin-top: min(60vh, 500px); /* Cap at 500px for very tall screens */
+        transform: translateY(-50%); /* Center the content at that point */
+        margin-bottom: 0;
     }
     
     .hero-background::after {
