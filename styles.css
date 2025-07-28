@@ -747,6 +747,10 @@ h2 {
         grid-template-columns: 1fr;
         text-align: center;
     }
+    
+    .footer-logo {
+        justify-content: center;
+    }
 }
 
 /* Smooth Scrolling */
