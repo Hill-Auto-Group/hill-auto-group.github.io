@@ -1,5 +1,99 @@
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle functionality - MOVED TO TOP
+    const mobileMenuToggle = document.createElement('button');
+    mobileMenuToggle.className = 'mobile-menu-toggle';
+    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    mobileMenuToggle.style.cssText = `
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1001;
+    `;
+
+    // Add the toggle button to navigation
+    const navContainer = document.querySelector('.nav-container');
+    if (navContainer) {
+        navContainer.appendChild(mobileMenuToggle);
+    }
+
+    // Mobile menu functionality
+    let mobileMenuOpen = false;
+
+    mobileMenuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const navMenu = document.querySelector('.nav-menu');
+        const navItems = navMenu.querySelectorAll('li');
+        
+        mobileMenuOpen = !mobileMenuOpen;
+        
+        if (mobileMenuOpen) {
+            // Set up menu container
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '100%';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.background = 'rgba(26, 26, 26, 0.98)';
+            navMenu.style.padding = '1rem 0';
+            navMenu.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            navMenu.style.gap = '0';
+            navMenu.style.opacity = '0';
+            navMenu.style.transform = 'translateY(-10px)';
+            navMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            
+            // Hide all nav items initially
+            navItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(-10px)';
+                item.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+            });
+            
+            // Animate menu container
+            setTimeout(() => {
+                navMenu.style.opacity = '1';
+                navMenu.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Animate nav items with staggered delay
+            navItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100 + (index * 80)); // 80ms delay between each item
+            });
+            
+            // Change icon to X
+            this.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            // Animate out - reverse order
+            navItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(-10px)';
+                }, index * 40); // 40ms delay for faster close
+            });
+            
+            // Hide menu container after items fade out
+            setTimeout(() => {
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    navMenu.style.display = 'none';
+                }, 200);
+            }, navItems.length * 40 + 50);
+            
+            // Change icon back to hamburger
+            this.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
     
@@ -8,6 +102,32 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
+            
+            // Close mobile menu if open with animation
+            if (window.innerWidth <= 768 && mobileMenuOpen) {
+                const navMenu = document.querySelector('.nav-menu');
+                const navItems = navMenu.querySelectorAll('li');
+                
+                // Quick fade out animation
+                navItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(-10px)';
+                    }, index * 30); // Faster close animation
+                });
+                
+                setTimeout(() => {
+                    navMenu.style.opacity = '0';
+                    navMenu.style.transform = 'translateY(-10px)';
+                    
+                    setTimeout(() => {
+                        navMenu.style.display = 'none';
+                    }, 150);
+                }, navItems.length * 30 + 50);
+                
+                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                mobileMenuOpen = false;
+            }
             
             if (targetSection) {
                 targetSection.scrollIntoView({
@@ -242,33 +362,60 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Mobile menu toggle (for future implementation)
-    const mobileMenuToggle = document.createElement('button');
-    mobileMenuToggle.className = 'mobile-menu-toggle';
-    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    mobileMenuToggle.style.cssText = `
-        display: none;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0.5rem;
-    `;
-
-    // Add mobile menu toggle for smaller screens
-    if (window.innerWidth <= 768) {
-        const navContainer = document.querySelector('.nav-container');
-        navContainer.appendChild(mobileMenuToggle);
-        mobileMenuToggle.style.display = 'block';
-    }
-
-    // Responsive mobile menu
-    window.addEventListener('resize', function() {
+    // Handle window resize
+    function handleMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        
         if (window.innerWidth <= 768) {
             mobileMenuToggle.style.display = 'block';
+            // Reset menu state on resize
+            if (!mobileMenuOpen) {
+                navMenu.style.display = 'none';
+            }
         } else {
             mobileMenuToggle.style.display = 'none';
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'row';
+            navMenu.style.position = 'static';
+            navMenu.style.width = 'auto';
+            navMenu.style.background = 'none';
+            navMenu.style.padding = '0';
+            navMenu.style.boxShadow = 'none';
+            navMenu.style.gap = '2rem';
+            mobileMenuOpen = false;
+            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    }
+
+    // Initialize on load and handle resize
+    handleMobileMenu();
+    window.addEventListener('resize', handleMobileMenu);
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const navMenu = document.querySelector('.nav-menu');
+        if (mobileMenuOpen && !navContainer.contains(e.target)) {
+            const navItems = navMenu.querySelectorAll('li');
+            
+            // Quick fade out animation
+            navItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(-10px)';
+                }, index * 30);
+            });
+            
+            setTimeout(() => {
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    navMenu.style.display = 'none';
+                }, 150);
+            }, navItems.length * 30 + 50);
+            
+            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileMenuOpen = false;
         }
     });
-}); 
+});

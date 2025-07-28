@@ -36,6 +36,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .nav-logo {
@@ -103,6 +104,11 @@ body {
     color: #0066cc;
 }
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    z-index: 1001;
+}
+
 /* Hero Section */
 .hero {
     height: min(100vh, 700px); /* Cap at 800px but allow smaller on mobile */
@@ -111,7 +117,6 @@ body {
     align-items: center;
     overflow: hidden;
 }
-
 
 .hero-background {
     position: absolute;
@@ -608,10 +613,39 @@ h2 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Mobile Navigation */
     .nav-menu {
         display: none;
+        transition: all 0.3s ease;
+        gap: 0;
     }
     
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-menu a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+    
+    .nav-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .mobile-menu-toggle {
+        display: block !important;
+    }
+    
+    /* Hero Section Mobile */
     .hero {
         align-items: flex-start; /* Align to top */
         padding-top: 0;
@@ -678,6 +712,7 @@ h2 {
         font-size: 0.9rem;
     }
     
+    /* About Section Mobile */
     .about-content {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -688,6 +723,7 @@ h2 {
         gap: 1rem;
     }
     
+    /* Contact Section Mobile */
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -746,4 +782,4 @@ html {
 .dealership-card:hover,
 .contact-form:hover {
     transform: translateY(-5px);
-} 
+}
