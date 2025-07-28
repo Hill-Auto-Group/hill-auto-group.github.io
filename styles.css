@@ -105,13 +105,13 @@ body {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
-    max-height: 800px
+    height: min(100vh, 600px); /* Cap at 800px but allow smaller on mobile */
     position: relative;
     display: flex;
     align-items: center;
     overflow: hidden;
 }
+
 
 .hero-background {
     position: absolute;
