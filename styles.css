@@ -105,7 +105,7 @@ body {
 
 /* Hero Section */
 .hero {
-    height: min(100vh, 600px); /* Cap at 800px but allow smaller on mobile */
+    height: min(100vh, 700px); /* Cap at 800px but allow smaller on mobile */
     position: relative;
     display: flex;
     align-items: center;
