@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/68884c933c120119250cd9f4/1j1a6m8i3';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+        <!--End of Tawk.to Script-->
 </head>
 <body>
     <!-- Navigation -->
@@ -63,7 +77,7 @@
                             <p>Years of Excellence</p>
                         </div>
                         <div class="stat">
-                            <h3>3</h3>
+                            <h3>2</h3>
                             <p>Dealership Locations</p>
                         </div>
                         <div class="stat">
@@ -89,13 +103,13 @@
                         <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Phoenix Dealership">
                     </div>
                     <div class="dealership-content">
-                        <h3>Phoenix Premium</h3>
-                        <p>Our flagship location featuring the latest luxury vehicles and state-of-the-art service center.</p>
+                        <h3>Santa Monica GMC</h3>
+                        <p>The team at Santa Monica GMC would like to welcome you to our dealership in Santa Monica, where we're confident you'll find the vehicles you're looking for at a price you can afford. Come and check out our full selection of new GMC vehicles, or get a great deal on a reliable pre-owned model.</p>
                         <div class="dealership-info">
-                            <p><i class="fas fa-map-marker-alt"></i> 1234 Luxury Lane, Phoenix, AZ</p>
-                            <p><i class="fas fa-phone"></i> (602) 555-0123</p>
+                            <p><i class="fas fa-map-marker-alt"></i> 1717 Santa Monica Blvd, Santa Monica, CA 90404</p>
+                            <p><i class="fas fa-phone"></i> (424) 220-8820</p>
                         </div>
-                        <button class="btn btn-outline">Contact Dealership</button>
+                        <a href="https://www.santamonicagmc.com/" target="_blank" class="btn btn-outline">Contact Dealership</a>
                     </div>
                 </div>
 
@@ -104,45 +118,16 @@
                         <img src="https://images.unsplash.com/photo-1582639510494-c80b5de9f148?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tucson Dealership">
                     </div>
                     <div class="dealership-content">
-                        <h3>Tucson Elite</h3>
-                        <p>Southern Arizona's premier destination for luxury vehicles and exceptional customer service.</p>
+                        <h3>Cadillac Beverly Hills</h3>
+                        <p>Come and check out our full selection of new Cadillac vehicles, or get a great deal on a reliable pre-owned model. No matter which vehicle you decide on, our professional finance team will help you get settled with a competitive financing or lease plan.</p>
                         <div class="dealership-info">
-                            <p><i class="fas fa-map-marker-alt"></i> 5678 Premium Drive, Tucson, AZ</p>
-                            <p><i class="fas fa-phone"></i> (520) 555-0456</p>
+                            <p><i class="fas fa-map-marker-alt"></i> 8767 Wilshire Blvd #101, Beverly Hills, CA 90211</p>
+                            <p><i class="fas fa-phone"></i> (424) 499-1085</p>
                         </div>
-                        <button class="btn btn-outline">Contact Dealership</button>
+                        <a href="https://www.cadillacbeverlyhills.com/" target="_blank" class="btn btn-outline">Contact Dealership</a>
                     </div>
                 </div>
 
-                <div class="dealership-card">
-                    <div class="dealership-image">
-                        <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Albuquerque Dealership">
-                    </div>
-                    <div class="dealership-content">
-                        <h3>Albuquerque Luxury</h3>
-                        <p>New Mexico's finest selection of premium vehicles with personalized service and expertise.</p>
-                        <div class="dealership-info">
-                            <p><i class="fas fa-map-marker-alt"></i> 9012 Elite Boulevard, Albuquerque, NM</p>
-                            <p><i class="fas fa-phone"></i> (505) 555-0789</p>
-                        </div>
-                        <button class="btn btn-outline">Contact Dealership</button>
-                    </div>
-                </div>
-
-                <div class="dealership-card">
-                    <div class="dealership-image">
-                        <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Las Vegas Dealership">
-                    </div>
-                    <div class="dealership-content">
-                        <h3>Las Vegas Premium</h3>
-                        <p>Experience luxury in the entertainment capital with our exclusive vehicle collection.</p>
-                        <div class="dealership-info">
-                            <p><i class="fas fa-map-marker-alt"></i> 3456 Luxury Way, Las Vegas, NV</p>
-                            <p><i class="fas fa-phone"></i> (702) 555-0321</p>
-                        </div>
-                        <button class="btn btn-outline">Contact Dealership</button>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -183,27 +168,25 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form>
+                    <form id="contact-form" onsubmit="return sendEmail(event)">
                         <div class="form-group">
-                            <input type="text" placeholder="Full Name" required>
+                            <input type="text" name="name" placeholder="Full Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Email Address" required>
+                            <input type="email" name="email" placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" placeholder="Phone Number">
+                            <input type="tel" name="phone" placeholder="Phone Number">
                         </div>
                         <div class="form-group">
-                            <select required>
+                            <select name="dealership" required>
                                 <option value="">Select Preferred Dealership</option>
-                                <option value="phoenix">Phoenix Premium</option>
-                                <option value="tucson">Tucson Elite</option>
-                                <option value="albuquerque">Albuquerque Luxury</option>
-                                <option value="lasvegas">Las Vegas Premium</option>
+                                <option value="santa-monica-gmc">Santa Monica GMC</option>
+                                <option value="cadillac-beverly-hills">Cadillac Beverly Hills</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="How can we help you?" rows="4"></textarea>
+                            <textarea name="message" placeholder="How can we help you?" rows="4"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
@@ -221,7 +204,7 @@
                         <img src="the_hill_companies_logo.png" alt="THE HILL COMPANIES" class="logo-image">
                         <span>Hill Auto Group</span>
                     </div>
-                    <p>Your trusted partner for vehicles in Saskatchewan.</p>
+                    <p>Your trusted partner for quality vehicles in the Southwest.</p>
                 </div>
                 
                 <div class="footer-section">
@@ -263,3 +246,7 @@
     <script src="script.js"></script>
 </body>
 </html> 
+
+
+
+

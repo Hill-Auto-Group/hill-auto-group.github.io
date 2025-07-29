@@ -513,6 +513,10 @@ h2 {
     color: white;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Footer */
 .footer {
     background: #1a1a1a;

@@ -1,3 +1,48 @@
+// EmailJS initialization
+(function() {
+    emailjs.init("d-PdqAXOBZzdI0wHP"); // Replace with your actual public key
+})();
+
+// EmailJS form submission function
+function sendEmail(e) {
+    e.preventDefault();
+    
+    const form = document.getElementById('contact-form');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    // Show loading state
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Get form data
+    const formData = {
+        name: form.querySelector('input[name="name"]').value,
+        email: form.querySelector('input[name="email"]').value,
+        phone: form.querySelector('input[name="phone"]').value,
+        dealership: form.querySelector('select[name="dealership"]').value,
+        message: form.querySelector('textarea[name="message"]').value
+    };
+    
+    // Send email using EmailJS
+    emailjs.send('service_dtfbsnl', '65854vk', formData)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
+            form.reset();
+        }, function(error) {
+            console.log('FAILED...', error);
+            showNotification('Sorry, there was an error sending your message. Please try again.', 'error');
+        })
+        .finally(function() {
+            // Reset button state
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+    
+    return false;
+}
+
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle functionality - MOVED TO TOP
@@ -178,45 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
             heroPlay.innerHTML = '<i class="fas fa-play"></i>';
         });
     }
-
-    // Form submission handling
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            const phone = this.querySelector('input[type="tel"]').value;
-            const dealership = this.querySelector('select').value;
-            const message = this.querySelector('textarea').value;
-
-            // Basic validation
-            if (!name || !email || !dealership) {
-                showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-
-            // Simulate form submission
-            showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
-            this.reset();
-        });
-    }
-
-    // Dealership card interactions
-    const dealershipCards = document.querySelectorAll('.dealership-card');
-    dealershipCards.forEach(card => {
-        const button = card.querySelector('.btn');
-        if (button) {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const dealershipName = card.querySelector('h3').textContent;
-                showNotification(`Redirecting to ${dealershipName}...`, 'info');
-            });
-        }
-    });
 
     // Hero buttons functionality
     const findVehicleBtn = document.querySelector('.hero-buttons .btn-primary');
