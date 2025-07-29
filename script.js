@@ -1,6 +1,15 @@
 // Initialize EmailJS
 emailjs.init("d-PdqAXOBZzdI0wHP");
 
+// Update copyright year dynamically
+function updateCopyrightYear() {
+    const currentYear = new Date().getFullYear();
+    const copyrightElement = document.querySelector('.footer-bottom p');
+    if (copyrightElement) {
+        copyrightElement.innerHTML = `&copy; ${currentYear} Hill Auto Group. All rights reserved.`;
+    }
+}
+
 // Notification system
 function showNotification(message, type = 'info') {
     // Remove existing notifications
@@ -121,6 +130,9 @@ function sendEmail(e) {
 
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Update copyright year
+    updateCopyrightYear();
+    
     // Mobile menu toggle functionality - MOVED TO TOP
     const mobileMenuToggle = document.createElement('button');
     mobileMenuToggle.className = 'mobile-menu-toggle';
