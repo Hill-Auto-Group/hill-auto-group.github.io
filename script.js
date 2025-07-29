@@ -25,7 +25,7 @@ function sendEmail(e) {
     };
     
     // Send email using EmailJS
-    emailjs.send('service_dtfbsnl', '65854vk', formData)
+    emailjs.send('service_dtfbsnl', 'template_6qmobho', formData)
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
             showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
