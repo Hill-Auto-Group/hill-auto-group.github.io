@@ -150,20 +150,7 @@ body {
     background-image: url('https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
     background-size: cover;
     background-position: center;
-    /* Removed background-attachment: fixed to fix Firefox mobile hitching */
-}
-
-/* Firefox-specific optimizations for hero section */
-@supports (-moz-appearance: none) {
-    .hero-background {
-        will-change: transform;
-        transform: translateZ(0);
-    }
-    
-    .hero-background video {
-        will-change: transform;
-        transform: translateZ(0);
-    }
+    background-attachment: fixed;
 }
 
 .hero-overlay {

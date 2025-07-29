@@ -368,31 +368,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     });
 
-    // Parallax effect for hero section (optimized for Firefox mobile)
-    let ticking = false;
-    
-    function updateParallax() {
+    // Parallax effect for hero section
+    window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
         const heroBackground = document.querySelector('.hero-background');
         
         if (heroBackground) {
-            // Reduce parallax intensity on mobile devices
-            const isMobile = window.innerWidth <= 768;
-            const parallaxIntensity = isMobile ? 0.2 : 0.5;
-            
-            heroBackground.style.transform = `translateY(${scrolled * parallaxIntensity}px)`;
+            heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
         }
-        ticking = false;
-    }
-    
-    function requestParallaxUpdate() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    }
-    
-    window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+    });
 
     // Handle window resize
     function handleMobileMenu() {
