@@ -5,24 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
     <meta name="googlebot" content="noindex, nofollow">
-    <title>Hill Auto Group - Prototype</title>
+    <meta name="author" content="Hill Auto Group">
+    <title>Hill Auto Group - Premier Auto Dealerships in the Southwest</title>
+    
+    <!-- Schema.org Local Business Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutomotiveBusiness",
+      "name": "Hill Auto Group",
+      "description": "Premier auto dealerships in the Southwest with locations at Santa Monica GMC and Cadillac Beverly Hills. 120+ years of excellence in the automotive industry.",
+      "url": "https://hillautogroup.com",
+      "telephone": "1-800-HILLAUTOS",
+      "email": "info@hillautogroup.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US",
+        "addressRegion": "CA"
+      },
+      "openingHours": "Mo-Fr 09:00-17:00",
+      "priceRange": "$$",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Vehicle Inventory",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Car",
+              "brand": "GMC",
+              "description": "New and pre-owned GMC vehicles"
+            }
+          },
+          {
+            "@type": "Offer", 
+            "itemOffered": {
+              "@type": "Car",
+              "brand": "Cadillac",
+              "description": "New and pre-owned Cadillac vehicles"
+            }
+          }
+        ]
+      },
+      "areaServed": [
+        {
+          "@type": "State",
+          "name": "California"
+        },
+        {
+          "@type": "State", 
+          "name": "Southwest United States"
+        }
+      ]
+    }
+    </script>
+    
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/68884c933c120119250cd9f4/1j1a6m8i3';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
-        </script>
-        <!--End of Tawk.to Script-->
+    
 </head>
 <body>
     <!-- Navigation -->
@@ -43,19 +86,39 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-background">
-            <video autoplay muted loop playsinline>
-                <source src="5309381-hd_1920_1080_25fps.mp4" type="video/mp4">
+            <video id="hero-video" autoplay muted loop playsinline>
+                <source src="5309381-hd_1920_1080_25fps.mp4" type="video/mp4" data-video-id="video1">
+                <source src="la_video_option_1.mp4" type="video/mp4" data-video-id="video2">
+                <source src="la_video_option_2.mp4" type="video/mp4" data-video-id="video3">
+                <source src="car_option_1.mp4" type="video/mp4" data-video-id="video4">
+                <source src="car_option_2.mp4" type="video/mp4" data-video-id="video5">
+                <source src="car_option_3.mp4" type="video/mp4" data-video-id="video6">
+                <source src="car_option_4.mp4" type="video/mp4" data-video-id="video7">
+                <source src="car_option_6.mp4" type="video/mp4" data-video-id="video8">
+                <source src="car_option_8.mp4" type="video/mp4" data-video-id="video9">
                 <!-- Fallback background image if video fails to load -->
                 <div class="hero-fallback"></div>
             </video>
             <div class="hero-overlay"></div>
+            <!-- Development Video Toggle (remove before production) -->
+            <div class="video-toggle" id="video-toggle">
+                <button class="toggle-btn" data-video="video1">1</button>
+                <button class="toggle-btn" data-video="video2">2</button>
+                <button class="toggle-btn" data-video="video3">3</button>
+                <button class="toggle-btn" data-video="video4">4</button>
+                <button class="toggle-btn" data-video="video5">5</button>
+                <button class="toggle-btn" data-video="video6">6</button>
+                <button class="toggle-btn" data-video="video7">7</button>
+                <button class="toggle-btn" data-video="video8">8</button>
+                <button class="toggle-btn" data-video="video9">9</button>
+            </div>
         </div>
         <div class="hero-content">
             <div class="hero-text">
                 <h1>Driven by 120 Years of Excellence.</h1>
                 <p>Explore top vehicles at our premier auto dealerships in the Southwest.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary">Shop Now</button>
+                    <button class="btn btn-primary">See Dealerships</button>
                 </div>
             </div>
         </div>
@@ -87,7 +150,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.pexels.com/photos/14292989/pexels-photo-14292989.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Luxury Cadillac on the road">
+                    <img src="top_image.jpg" alt="Luxury Cadillac on the road">
                 </div>
             </div>
         </div>
@@ -100,7 +163,7 @@
             <div class="dealership-grid">
                 <div class="dealership-card">
                     <div class="dealership-image">
-                        <img src="https://images.pexels.com/photos/28965332/pexels-photo-28965332.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Santa Monica GMC Dealership">
+                        <img src="gmc.jpg" alt="Santa Monica GMC Dealership">
                     </div>
                     <div class="dealership-content">
                         <h3>Santa Monica GMC</h3>
@@ -115,7 +178,7 @@
 
                 <div class="dealership-card">
                     <div class="dealership-image">
-                        <img src="https://images.pexels.com/photos/27404360/pexels-photo-27404360.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cadillac Beverly Hills Dealership">
+                        <img src="cadillac.jpeg" alt="Cadillac Beverly Hills Dealership">
                     </div>
                     <div class="dealership-content">
                         <h3>Cadillac Beverly Hills</h3>
@@ -138,14 +201,14 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <h2>Contact Us</h2>
-                    <p>Ready to experience the Hill Auto Group difference? Get in touch with our team today.</p>
+                    <p>Get in touch with our team today.</p>
                     
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h4>Call Us</h4>
-                                <p><a href="tel:1-800-HILLAUTOS">1-800-HILLAUTOS</a></p>
+                                <p><a href="tel:424-499-1085">(424) 499-1085</a></p>
                             </div>
                         </div>
                         
@@ -157,40 +220,11 @@
                             </div>
                         </div>
                         
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h4>Business Hours</h4>
-                                <p>Mon-Fri: 9AM-5PM<br>Sat-Sun: Closed</p>
-                            </div>
-                        </div>
+                      
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <form id="contact-form" onsubmit="return sendEmail(event)">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="Full Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="Email Address" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" name="phone" placeholder="Phone Number">
-                        </div>
-                        <div class="form-group">
-                            <select name="dealership" required>
-                                <option value="">Select Preferred Dealership</option>
-                                <option value="santa-monica-gmc">Santa Monica GMC</option>
-                                <option value="cadillac-beverly-hills">Cadillac Beverly Hills</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" placeholder="How can we help you?" rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
+              
             </div>
         </div>
     </section>
@@ -224,16 +258,6 @@
                         <li><a href="#dealerships">Financing</a></li>
                         <li><a href="#dealerships">Service & Parts</a></li>
                     </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
                 </div>
             </div>
             

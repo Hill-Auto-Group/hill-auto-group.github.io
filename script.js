@@ -312,6 +312,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Video toggle functionality for development
+    const videoToggle = document.getElementById('video-toggle');
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    
+    if (videoToggle && toggleButtons.length > 0) {
+        // Set initial active state
+        toggleButtons[0].classList.add('active');
+        
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video');
+                const video = document.getElementById('hero-video');
+                const sources = video.querySelectorAll('source');
+                
+                // Remove active class from all buttons
+                toggleButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Find and switch to the selected video source
+                sources.forEach(source => {
+                    if (source.getAttribute('data-video-id') === videoId) {
+                        const currentSrc = video.currentSrc;
+                        const newSrc = source.getAttribute('src');
+                        
+                        if (currentSrc !== newSrc) {
+                            video.pause();
+                            video.src = newSrc;
+                            video.load();
+                            video.play().catch(e => console.log('Video play error:', e));
+                        }
+                    }
+                });
+            });
+        });
+    }
+
     // Hero buttons functionality
     const findVehicleBtn = document.querySelector('.hero-buttons .btn-primary');
     const testDriveBtn = document.querySelector('.hero-buttons .btn-secondary');
