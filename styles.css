@@ -235,7 +235,7 @@ body {
 
 /* Development Video Toggle */
 .video-toggle {
-    position: fixed;
+    position: absolute;
     top: 5rem;
     left: 1rem;
     z-index: 1002;
