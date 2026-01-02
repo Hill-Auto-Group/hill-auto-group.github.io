@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hero play button functionality
     const heroPlay = document.querySelector('.hero-play');
-    const heroVideo = document.querySelector('.hero-background video');
+    const heroVideo = document.getElementById('hero-video');
     
     if (heroPlay && heroVideo) {
         heroPlay.addEventListener('click', function() {
@@ -312,41 +312,113 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Video toggle functionality for development
+    // Video carousel functionality for development
     const videoToggle = document.getElementById('video-toggle');
-    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    const videoPrevBtn = document.getElementById('video-prev');
+    const videoNextBtn = document.getElementById('video-next');
+    const videoCounter = document.getElementById('video-counter');
     
-    if (videoToggle && toggleButtons.length > 0) {
-        // Set initial active state
-        toggleButtons[0].classList.add('active');
+    if (videoToggle && heroVideo) {
+        const sources = heroVideo.querySelectorAll('source');
+        let currentVideoIndex = 0;
+        const totalVideos = sources.length;
         
-        toggleButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video');
-                const video = document.getElementById('hero-video');
-                const sources = video.querySelectorAll('source');
-                
-                // Remove active class from all buttons
-                toggleButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Find and switch to the selected video source
-                sources.forEach(source => {
-                    if (source.getAttribute('data-video-id') === videoId) {
-                        const currentSrc = video.currentSrc;
-                        const newSrc = source.getAttribute('src');
-                        
-                        if (currentSrc !== newSrc) {
-                            video.pause();
-                            video.src = newSrc;
-                            video.load();
-                            video.play().catch(e => console.log('Video play error:', e));
-                        }
-                    }
-                });
-            });
+        // Update video counter display
+        function updateCounter() {
+            if (videoCounter) {
+                videoCounter.textContent = `${currentVideoIndex + 1} / ${totalVideos}`;
+            }
+        }
+        
+        // Switch to a specific video by index
+        function switchVideo(index) {
+            if (index < 0 || index >= totalVideos) return;
+            
+            currentVideoIndex = index;
+            const source = sources[index];
+            const newSrc = source.getAttribute('src');
+            const currentSrc = heroVideo.currentSrc;
+            
+            if (currentSrc !== newSrc) {
+                const wasPlaying = !heroVideo.paused;
+                heroVideo.pause();
+                heroVideo.src = newSrc;
+                heroVideo.load();
+                if (wasPlaying) {
+                    heroVideo.play().catch(e => console.log('Video play error:', e));
+                }
+            }
+            
+            updateCounter();
+        }
+        
+        // Navigate to previous video
+        function prevVideo() {
+            const newIndex = currentVideoIndex === 0 ? totalVideos - 1 : currentVideoIndex - 1;
+            switchVideo(newIndex);
+        }
+        
+        // Navigate to next video
+        function nextVideo() {
+            const newIndex = currentVideoIndex === totalVideos - 1 ? 0 : currentVideoIndex + 1;
+            switchVideo(newIndex);
+        }
+        
+        // Arrow button event listeners
+        if (videoPrevBtn) {
+            videoPrevBtn.addEventListener('click', prevVideo);
+        }
+        
+        if (videoNextBtn) {
+            videoNextBtn.addEventListener('click', nextVideo);
+        }
+        
+        // Keyboard navigation (arrow keys)
+        document.addEventListener('keydown', function(e) {
+            if (videoToggle && window.getComputedStyle(videoToggle).display !== 'none') {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevVideo();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextVideo();
+                }
+            }
         });
+        
+        // Swipe gesture detection for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const heroSection = document.querySelector('.hero');
+        
+        if (heroSection) {
+            heroSection.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            heroSection.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+        
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum swipe distance in pixels
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next video
+                    nextVideo();
+                } else {
+                    // Swipe right - previous video
+                    prevVideo();
+                }
+            }
+        }
+        
+        // Initialize counter
+        updateCounter();
     }
 
     // Hero buttons functionality

@@ -102,15 +102,13 @@
             <div class="hero-overlay"></div>
             <!-- Development Video Toggle (remove before production) -->
             <div class="video-toggle" id="video-toggle">
-                <button class="toggle-btn" data-video="video1">1</button>
-                <button class="toggle-btn" data-video="video2">2</button>
-                <button class="toggle-btn" data-video="video3">3</button>
-                <button class="toggle-btn" data-video="video4">4</button>
-                <button class="toggle-btn" data-video="video5">5</button>
-                <button class="toggle-btn" data-video="video6">6</button>
-                <button class="toggle-btn" data-video="video7">7</button>
-                <button class="toggle-btn" data-video="video8">8</button>
-                <button class="toggle-btn" data-video="video9">9</button>
+                <button class="toggle-btn toggle-btn-left" id="video-prev" aria-label="Previous video">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="video-counter" id="video-counter">1 / 9</span>
+                <button class="toggle-btn toggle-btn-right" id="video-next" aria-label="Next video">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
         <div class="hero-content">
