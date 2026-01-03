@@ -233,55 +233,6 @@ body {
     margin-left: 0.2rem;
 }
 
-/* Development Video Toggle */
-.video-toggle {
-    position: absolute;
-    top: 5rem;
-    left: 1rem;
-    z-index: 1002;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-
-.toggle-btn {
-    padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    color: white;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
-}
-
-.toggle-btn:active {
-    transform: scale(0.95);
-}
-
-.video-counter {
-    color: white;
-    font-size: 0.85rem;
-    font-weight: 500;
-    min-width: 45px;
-    text-align: center;
-    padding: 0 0.5rem;
-}
 
 /* Buttons */
 .btn {
@@ -814,25 +765,6 @@ h2 {
         gap: 2rem;
     }
     
-    /* Video Toggle Mobile */
-    .video-toggle {
-        top: 6rem;
-        left: 0.5rem;
-        padding: 0.4rem 0.6rem;
-        gap: 0.4rem;
-    }
-    
-    .toggle-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 0.8rem;
-    }
-    
-    .video-counter {
-        font-size: 0.75rem;
-        min-width: 40px;
-        padding: 0 0.3rem;
-    }
 }
 
 @media (max-width: 480px) {
