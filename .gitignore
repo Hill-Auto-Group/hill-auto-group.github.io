@@ -2,3 +2,7 @@
 *.code-workspace
 la_video_option_2.mp4
 
+# Documentation files (not needed for production)
+*.md
+!README.md
+

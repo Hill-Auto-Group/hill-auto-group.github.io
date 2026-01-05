@@ -1,6 +1,3 @@
-// Initialize EmailJS
-emailjs.init("d-PdqAXOBZzdI0wHP");
-
 // Update copyright year dynamically
 function updateCopyrightYear() {
     const currentYear = new Date().getFullYear();
@@ -86,46 +83,6 @@ function showNotification(message, type = 'info') {
             }, 300);
         }
     }, 5000);
-}
-
-// EmailJS form submission function
-function sendEmail(e) {
-    e.preventDefault();
-    
-    const form = document.getElementById('contact-form');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    
-    // Show loading state
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-    
-    // Get form data
-    const formData = {
-        name: form.querySelector('input[name="name"]').value,
-        email: form.querySelector('input[name="email"]').value,
-        phone: form.querySelector('input[name="phone"]').value,
-        dealership: form.querySelector('select[name="dealership"]').value,
-        message: form.querySelector('textarea[name="message"]').value
-    };
-    
-    // Send email using EmailJS
-    emailjs.send('service_dtfbsnl', 'template_6qmobho', formData)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
-            form.reset();
-        }, function(error) {
-            console.log('FAILED...', error);
-            showNotification('Sorry, there was an error sending your message. Please try again.', 'error');
-        })
-        .finally(function() {
-            // Reset button state
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        });
-    
-    return false;
 }
 
 // Smooth scrolling for navigation links
